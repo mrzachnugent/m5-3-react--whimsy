@@ -1,8 +1,10 @@
 import React, { useContext } from "react";
+
 import styled from "styled-components";
 
 import Header from "./Header";
 import ActionBar from "./ActionBar";
+import { Stat } from "./Stat";
 
 const Tweet = ({
   displayName,
@@ -11,6 +13,11 @@ const Tweet = ({
   tweetContents,
   isRetweetedByCurrentUser,
   isLikedByCurrentUser,
+  date,
+  numOfRetweets,
+  numOfLikes,
+  handleToggleLike,
+  handleIsRetweeted,
 }) => {
   return (
     <Wrapper>
@@ -20,10 +27,19 @@ const Tweet = ({
         avatarSrc={avatarSrc}
       />
       <TweetContents>{tweetContents}</TweetContents>
+      <Timestamp>{date}</Timestamp>
+      <Divider />
+      <Stats>
+        <Stat num={numOfRetweets} action="Retweet" />
+        <Stat num={numOfLikes} action="Likes" />
+      </Stats>
+
       <Divider />
       <ActionBar
         isRetweetedByCurrentUser={isRetweetedByCurrentUser}
         isLikedByCurrentUser={isLikedByCurrentUser}
+        handleIsLiked={handleToggleLike}
+        handleIsRetweeted={handleIsRetweeted}
       />
       <Divider />
     </Wrapper>
